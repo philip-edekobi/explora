@@ -1,0 +1,14 @@
+.folder:hover{
+    background-color: rgb(178, 164, 255);
+    color: #000;
+}
+
+.selected{
+    background-color: rgb(145, 116, 248);
+    color: rgb(255, 247, 247);
+}
+
+.folderIcon{
+    display: inline-block;
+    font-size: "2rem";
+}

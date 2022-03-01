@@ -1,0 +1,13 @@
+.sideHeaderContainer{
+    background-color: transparent;
+    border: solid transparent;
+}
+.sideBar{
+    -webkit-box-shadow: 0px -1px 18px -5px #000000; 
+    box-shadow: 0px -1px 18px -5px #000000;
+}
+.link:hover{
+    color: rgb(84, 59, 221);
+    text-decoration: underline;
+    cursor: pointer;
+}

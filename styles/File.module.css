@@ -1,0 +1,9 @@
+.file{
+    -webkit-box-shadow: 0px -1px 18px -5px #aaaaaa; 
+    box-shadow: 0px -1px 18px -5px #aaaaaa;
+    border-radius: 8px;
+}
+
+.file:hover{
+    background-color: #dddddd;
+}
