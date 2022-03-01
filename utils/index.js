@@ -1,5 +1,5 @@
 const mediaTypes =  new Map([
-    ["audio", [ ".mp3", ".wav", ".ogg", "aac" ]],
+    ["audio", [ ".mp3", ".wav", ".ogg", ".aac" ]],
     ["video", [ ".mp4", ".3gp", ".mkv" ]],
     ["image", [ ".jpg", ".jpeg", ".gif", ".png" ]]
 ]);
