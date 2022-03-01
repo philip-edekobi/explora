@@ -6,11 +6,13 @@ import { MdArrowDropDown, MdOutlineContentPaste } from 'react-icons/md';
 
 import { Layout, File, Footer } from "../components";
 import { folders } from '../utils';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Header = () => (
-    <header style={{position: "sticky", top: 0}}>
+    <header style={{position: "sticky", top: 0, cursor: "pointer"}}>
         <Text ml="4" fontSize="3xl" fontWeight="600" >
-            Explora 
+            <Link passHref href="/">Explora</Link> 
         </Text>
     </header>
 );
@@ -19,6 +21,8 @@ export default function Dashboard(){
     const [activeFolderId, setActiveFolderId] = useState(1);
     const [pasteCache, setCache] = useState(null);
     const [isSmall] = useMediaQuery('(max-width: 680px)');
+
+    const router = useRouter();
 
     const cut = (file) => {
         setCache(file);

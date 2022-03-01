@@ -2,10 +2,13 @@ import {
   Flex, Box, Text, Spacer, Button, 
   Stack, useMediaQuery 
 } from '@chakra-ui/react';
-import { Navbar, Footer } from '../components'; 
 
-import Image from 'next/image'
+import { Navbar, Footer } from '../components'; 
+import earth from '../public/images/earth.png';
+
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+
 export default function Home() {
   const [isSmall] = useMediaQuery("(max-width: 660px)");
 
@@ -38,9 +41,11 @@ export default function Home() {
           </Stack>
         </Box>
         <Box 
-          w={isSmall ? "100%" : "50%"} 
-          display="flex" justify="center" align="center" flexDirection="column"
-        ></Box>
+          w={isSmall ? "100%" : "50%"}
+          display="flex" justify="center" align="center"
+        >
+          <Image alt="Picture of the earth." src={earth} width={400} height={400} />
+        </Box>
       </Flex>
       <Spacer />
       <Footer />
