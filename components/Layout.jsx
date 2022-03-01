@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { nanoid } from 'nanoid';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 import { 
-    Box, Flex, Text, useMediaQuery 
+    Box, Flex, Text
 } from '@chakra-ui/react';
+
+import { useMediaQuery } from '@mui/material';
 
 import styles from '../styles/layout.module.css';
 import { folders } from '../utils';
@@ -13,7 +15,7 @@ import { folders } from '../utils';
 import Folder from './Folder';
 
 const Layout = ({ children, activeFolderId, setActiveFolderId }) => {
-    const [isLarge] = useMediaQuery('(min-width: 768px)');
+    const isLarge = useMediaQuery("(min-width: 800px)");
 
     function onFolderClick(e){
         setActiveFolderId(parseInt(e.target.id));
@@ -26,9 +28,10 @@ const Layout = ({ children, activeFolderId, setActiveFolderId }) => {
     return (
         <Flex w="100%" h="100%" bgColor="gray.100" >
             {
-                isLarge
+                !!isLarge
                     && 
-                <Flex h="100vh" w="25%" flexDirection="column" className={styles.sideBar} bgColor="gray.200"
+                <Flex h="100vh" w="25%" flexDirection="column" 
+                    className={styles.sideBar} bgColor="gray.200"
                     style={{borderTopRightRadius: "0.6em", borderBottomRightRadius: "0.6em"}}
                  >
                     <Box p="2" color="gray.100" bgColor="purple.600" className={styles.sideHeaderContainer}
@@ -43,6 +46,7 @@ const Layout = ({ children, activeFolderId, setActiveFolderId }) => {
                             return <Folder id={folder.id} key={nanoid()} 
                                         folder={folder} onClick={onFolderClick} 
                                         active={folder.id === activeFolderId} 
+                                        style={{width: "100%"}}
                                     />
                         })}
                     </Flex>

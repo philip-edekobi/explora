@@ -8,7 +8,7 @@ import { Layout, File, Footer } from "../components";
 import { folders } from '../utils';
 
 const Header = () => (
-    <header>
+    <header style={{position: "sticky", top: 0}}>
         <Text ml="4" fontSize="3xl" fontWeight="600" >
             Explora 
         </Text>
@@ -20,6 +20,16 @@ export default function Dashboard(){
     const [pasteCache, setCache] = useState(null);
     const [isSmall] = useMediaQuery('(max-width: 680px)');
 
+    const cut = (file) => {
+        setCache(file);
+    }
+
+    const paste = () => {
+        if (pasteCache && !files.includes(pasteCache)){
+
+        }
+    }
+
     return (
         <div>
             <Layout activeFolderId={activeFolderId} setActiveFolderId={setActiveFolderId}>
@@ -30,7 +40,7 @@ export default function Dashboard(){
                     color= { isSmall ? "gray.100" : "purple.600" }
                 >
                     <Header />
-                    {isSmall && <>
+                    {!!isSmall && <>
                         <Spacer />
                         <Select icon={<MdArrowDropDown />} 
                             ml="10" mt="1" bgColor="white"
@@ -44,17 +54,17 @@ export default function Dashboard(){
                         </Select>
                     </>}
                 </Flex>
-                <Flex flexWrap="wrap" ml="5" justify={isSmall ? 'center' : "start"} align="center" >
-                    {files.map(file => (<File key={nanoid()} file={file} />))}
-                </Flex>
-                <Flex justify="center" align="center"  mt="7" py="3" fontSize="6xl">
+                <Flex justify="center" align="center" py="3" fontSize="6xl">
                     <Button colorScheme="blue" mx="4" >New File</Button>
                     <Button variant={pasteCache ? "solid" : "outlined"} 
                         isDisabled={!pasteCache} colorScheme="teal" 
-                        rightIcon={<MdOutlineContentPaste />}
+                        rightIcon={<MdOutlineContentPaste />} onClick={paste}
                     >
                         Paste File
                     </Button>
+                </Flex>
+                <Flex flexWrap="wrap" ml="5" justify={isSmall ? 'center' : "start"} align="center" >
+                    {files.map(file => (<File key={nanoid()} cut={cut} file={file} />))}
                 </Flex>
                 <Spacer />
                 <Footer />

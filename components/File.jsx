@@ -5,15 +5,16 @@ import {
     Box, Flex, Text, Spacer, Menu, MenuItem, MenuButton, MenuList, IconButton 
 } from '@chakra-ui/react';
 
-import { CgCopy, CgSoftwareDownload } from "react-icons/cg";
-import { MdEditNote } from 'react-icons/md';
+import { CgSoftwareDownload } from "react-icons/cg";
+import { FiScissors } from "react-icons/fi";
+import { MdEditNote, MdDelete } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FcMusic, FcDocument, FcVideoFile, FcImageFile } from 'react-icons/fc';
 
 import { getFileType } from "../utils";
 import styles from '../styles/File.module.css';
 
-const File = ({ file }) => {
+const File = ({ file, cut }) => {
     const icon = iconise(file.name);
 
     return (
@@ -26,9 +27,15 @@ const File = ({ file }) => {
                     <Menu size="sm" color="gray.200">
                         <MenuButton as={IconButton} aria-label="Menu" icon={<BsThreeDotsVertical />} />
                         <MenuList w="8px">
-                                <MenuItem icon={<CgCopy />}>Copy</MenuItem>
+                                <MenuItem 
+                                    icon={<FiScissors />}
+                                    onClick={() => cut(file)}
+                                >
+                                    Cut File
+                                </MenuItem>
                                 <MenuItem icon={<CgSoftwareDownload />}>Download</MenuItem>
-                                <MenuItem icon={<MdEditNote />}>Edit</MenuItem>
+                                <MenuItem icon={<MdEditNote />}>Rename</MenuItem>
+                                <MenuItem icon={<MdDelete />}>Delete</MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>
