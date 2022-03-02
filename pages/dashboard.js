@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
-import { Flex, Text, Button, Spacer, Select, useMediaQuery } from "@chakra-ui/react";
+import { Flex, Text, Button, Input, Spacer, Select, useMediaQuery } from "@chakra-ui/react";
 import { MdArrowDropDown, MdOutlineContentPaste } from 'react-icons/md';
 
 import { Layout, File, Footer } from "../components";
-import { folders } from '../utils';
+import { folders, addFile } from '../utils';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -20,15 +20,22 @@ const Header = () => (
 export default function Dashboard(){
     const [activeFolderId, setActiveFolderId] = useState(1);
     const [pasteCache, setCache] = useState(null);
+    const [newFile, setNewFile] = useState(null);
+    const [currentFolder, setCurrentFolder] = useState(folders[0]);
+
     const [isSmall] = useMediaQuery('(max-width: 680px)');
 
     const router = useRouter();
 
-    const cut = (file) => {
+    function cut(file){
         setCache(file);
     }
 
-    const paste = () => {
+    async function uploadFile(file){
+        const response = await addFile(activeFolderId, file)
+    }
+
+    function paste(){
         if (pasteCache && !files.includes(pasteCache)){
 
         }
@@ -36,7 +43,9 @@ export default function Dashboard(){
 
     return (
         <div>
-            <Layout activeFolderId={activeFolderId} setActiveFolderId={setActiveFolderId}>
+            <Layout activeFolderId={activeFolderId} setActiveFolderId={setActiveFolderId}
+                currentFolder={currentFolder} setCurrentFolder={setCurrentFolder}
+            >
                 <Flex mx={ isSmall ? "" : "6" } display="flex"
                     mt={ isSmall ? "" : "3" }
                     height={ isSmall ? "3rem" : ""}
@@ -59,7 +68,8 @@ export default function Dashboard(){
                     </>}
                 </Flex>
                 <Flex justify="center" align="center" py="3" fontSize="6xl">
-                    <Button colorScheme="blue" mx="4" >New File</Button>
+                    <Input w="100" mx="4" color="blue.400" type="file" onChange={(e) => setNewFile(e.target.value)} />
+                    <Button colorScheme="teal" onClick={uploadFile(newFile)} >Upload File</Button>
                     <Button variant={pasteCache ? "solid" : "outlined"} 
                         isDisabled={!pasteCache} colorScheme="teal" 
                         rightIcon={<MdOutlineContentPaste />} onClick={paste}
