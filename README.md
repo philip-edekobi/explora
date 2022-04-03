@@ -4,4 +4,4 @@
 
 ## Check it out
 
-Visit this link to [see it live]("")
+Visit this link to [see it live]("https://explora.netlify.app")
